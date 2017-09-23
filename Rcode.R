@@ -1,0 +1,13 @@
+nomda <- read.table("/Users/jtf/Documents/k-mer_proj/k=5/split=20kbp_chr1_5mer_compNORM_annotate_seed42.txt", header = TRUE)
+nomdat <- t(nomda)
+nomdat.dis <- dist(nomdat[2:nrow(nomdat), 1:(ncol(nomdat) - 2)])
+nomda.cmds <- cmdscale(nomdat.dis, k = 2)
+#plot(nomda.cmds)
+
+anno <- cbind(nomdat[2:nrow(nomdat),ncol(nomdat) - 1], nomda.cmds, nomdat[2:nrow(nomdat),ncol(nomdat)])
+plot(anno[,2], anno[,3], main = paste("Mtdna compared with 30 random windows of chr1 when normalized for single base pair content"))
+points(nomda.cmds[31:32, 1], nomda.cmds[31:32, 2], col = "orange", pch = 10)
+points(anno[,2], anno[,3], col = ifelse(as.numeric(anno[,1]) > 0.7, 'red', 'blue'), pch = 2)
+#points(anno[,2], anno[,3], col = ifelse(as.numeric(anno[,1]) > 0.7, 'green', 'red'), pch = 10)
+#w5 is rightmost(seed 42)
+#w17 is topmost(seed 42)

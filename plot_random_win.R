@@ -1,0 +1,6 @@
+nomda <- read.table("/Users/jtf/Documents/k-mer_proj/split=20kbp_chr1_5mer_compNORM_annotate.txt", header = TRUE)
+nomdat <- t(nomda)
+nomdat.dis <- dist(nomdat[2:nrow(nomdat), 1:ncol(nomdat) - 1])
+nomda.cmds <- cmdscale(nomdat.dis, k = 2)
+plot(nomda.cmds)
+points(nomda.cmds[31:32, 1], nomda.cmds[31:32, 2], col = "red")
